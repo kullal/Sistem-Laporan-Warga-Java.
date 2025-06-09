@@ -87,6 +87,12 @@ public class MenuPegawai extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelLaporanDesa);
 
+        txtCariLaporan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCariLaporanActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Cari Laporan");
 
         btnCariLaporan.setText("OK");
@@ -200,7 +206,8 @@ public class MenuPegawai extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCariLaporanActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void btnCariLaporanActionPerformed(java.awt.event.ActionEvent evt) {   
+//        String searchNama = txtCariLaporan.getText().trim();
         String searchNik = txtCariLaporan.getText().trim();
         if (searchNik.isEmpty()) {
             // Jika kotak pencarian kosong, tampilkan semua data
@@ -329,10 +336,14 @@ public class MenuPegawai extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnBack1ActionPerformed
 
+    private void txtCariLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCariLaporanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCariLaporanActionPerformed
+
     private void inisialisasiTabelModel() {
         modelTabelLaporan = new DefaultTableModel(
             new Object[][] {},
-            new String[] {"ID", "NIK Pelapor", "Jenis", "Detail", "Tgl Kejadian", "Tgl Lapor", "Status", "Pgw Penjawab", "Tgl Update"}
+            new String[] {"ID", "NIK Pelapor", "Nama Pelapor", "Jenis", "Detail", "Tgl Kejadian", "Tgl Lapor", "Status", "Pgw Penjawab", "Tgl Update"}
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -354,6 +365,7 @@ public class MenuPegawai extends javax.swing.JFrame {
             modelTabelLaporan.addRow(new Object[]{
                 lap.getId_laporan(),
                 lap.getNik_pelapor(),
+                lap.getNama_pelapor(),
                 lap.getJenis_laporan(),
                 detailSingkat,
                 lap.getTanggal_kejadian() != null ? lap.getTanggal_kejadian() : "-",

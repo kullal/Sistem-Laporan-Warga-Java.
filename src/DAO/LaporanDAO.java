@@ -20,21 +20,22 @@ public class LaporanDAO implements LaporanDAOInterface {
 
     @Override
     public boolean insert(Laporan l) {
-        String sql = "INSERT INTO laporan (nik_pelapor, jenis_laporan, detail_laporan, tanggal_kejadian, tanggal_lapor, status_laporan) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO laporan (nik_pelapor, nama_pelapor, jenis_laporan, detail_laporan, tanggal_kejadian, tanggal_lapor, status_laporan) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = KoneksiDB.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             
             pstmt.setString(1, l.getNik_pelapor());
-            pstmt.setString(2, l.getJenis_laporan());
-            pstmt.setString(3, l.getDetail_laporan());
-            pstmt.setString(4, l.getTanggal_kejadian());
+            pstmt.setString(2, l.getNama_pelapor());
+            pstmt.setString(3, l.getJenis_laporan());
+            pstmt.setString(4, l.getDetail_laporan());
+            pstmt.setString(5, l.getTanggal_kejadian());
 
-            pstmt.setString(5, l.getTanggal_lapor());
+            pstmt.setString(6, l.getTanggal_lapor());
 
             if (l.getStatus_laporan() == null || l.getStatus_laporan().isEmpty()) {
-                pstmt.setString(6, "Pending");
+                pstmt.setString(7, "Pending");
             } else {
-                pstmt.setString(6, l.getStatus_laporan());
+                pstmt.setString(7, l.getStatus_laporan());
             }
             
             int affectedRows = pstmt.executeUpdate();
@@ -65,6 +66,7 @@ public class LaporanDAO implements LaporanDAOInterface {
                 Laporan lap = new Laporan();
                 lap.setId_laporan(rs.getInt("id_laporan"));
                 lap.setNik_pelapor(rs.getString("nik_pelapor"));
+                lap.setNama_pelapor(rs.getString("nama_pelapor"));
                 lap.setJenis_laporan(rs.getString("jenis_laporan"));
                 lap.setDetail_laporan(rs.getString("detail_laporan"));
                 lap.setTanggal_kejadian(rs.getString("tanggal_kejadian"));

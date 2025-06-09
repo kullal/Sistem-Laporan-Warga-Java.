@@ -8,6 +8,7 @@ package Model;
 public class Laporan {
     private int id_laporan;
     private String nik_pelapor; // Bisa juga objek Warga jika ingin relasi langsung di model
+    private String nama_pelapor;
     private String jenis_laporan;
     private String detail_laporan;
     private String tanggal_kejadian; // Diubah ke String
@@ -54,6 +55,14 @@ public class Laporan {
 
     public void setNik_pelapor(String nik_pelapor) {
         this.nik_pelapor = nik_pelapor;
+    }
+
+    public String getNama_pelapor() {
+        return nama_pelapor;
+    }
+
+    public void setNama_pelapor(String nama_pelapor) {
+        this.nama_pelapor = nama_pelapor;
     }
 
     public String getJenis_laporan() {

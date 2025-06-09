@@ -27,18 +27,20 @@ public class LaporanController {
     /**
      * Menangani submit laporan baru dari warga.
      * @param nikPelapor NIK warga yang melapor.
+     * @param namaPelapor Nama warga yang melapor.
      * @param jenisLaporan Jenis laporan.
      * @param detailLaporan Detail dari laporan.
      * @param tanggalKejadianStr Tanggal kejadian dalam format String.
      * @param viewAsal Referensi ke view pemanggil untuk menampilkan pesan (opsional).
      * @return true jika berhasil, false jika gagal.
      */
-    public boolean submitLaporanBaru(String nikPelapor, String jenisLaporan, String detailLaporan, String tanggalKejadianStr, IsiLaporanWarga viewAsal) {
+    public boolean submitLaporanBaru(String nikPelapor, String namaPelapor, String jenisLaporan, String detailLaporan, String tanggalKejadianStr, IsiLaporanWarga viewAsal) {
         if (nikPelapor == null || nikPelapor.trim().isEmpty() || 
+            namaPelapor == null || namaPelapor.trim().isEmpty() || 
             jenisLaporan == null || jenisLaporan.trim().isEmpty() || 
             detailLaporan == null || detailLaporan.trim().isEmpty() || 
-            tanggalKejadianStr == null || tanggalKejadianStr.trim().isEmpty()) { // Validasi String tanggal
-            JOptionPane.showMessageDialog(viewAsal, "Semua field (NIK, Jenis, Detail, Tanggal YYYY-MM-DD) harus diisi!", "Submit Laporan Gagal", JOptionPane.ERROR_MESSAGE);
+            tanggalKejadianStr == null || tanggalKejadianStr.trim().isEmpty()) { 
+            JOptionPane.showMessageDialog(viewAsal, "Semua field (NIK, Nama, Jenis, Detail, Tanggal YYYY-MM-DD) harus diisi!", "Submit Laporan Gagal", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
@@ -54,6 +56,7 @@ public class LaporanController {
 
         Laporan laporanBaru = new Laporan();
         laporanBaru.setNik_pelapor(nikPelapor.trim());
+        laporanBaru.setNama_pelapor(namaPelapor.trim());
         laporanBaru.setJenis_laporan(jenisLaporan);
         laporanBaru.setDetail_laporan(detailLaporan.trim());
         laporanBaru.setTanggal_kejadian(tanggalKejadianStr); // Simpan sebagai String

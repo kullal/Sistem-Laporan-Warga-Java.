@@ -9,6 +9,9 @@ import java.util.Date; // Untuk mendapatkan tanggal
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import Controller.LaporanController;
+import javax.swing.text.MaskFormatter;
+import DAO.WargaDAO;
+import Model.Warga;
 
 /**
  *
@@ -17,6 +20,7 @@ import Controller.LaporanController;
 public class IsiLaporanWarga extends javax.swing.JFrame {
     private String nik; // Field untuk menyimpan NIK
     private LaporanController laporanController = new LaporanController();
+    private WargaDAO wargaDAO = new WargaDAO();
 
     /**
      * Creates new form LoginMenu
@@ -77,13 +81,14 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Tanggal");
 
-        FormatTanggal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL))));
-        FormatTanggal.setToolTipText("");
-        FormatTanggal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FormatTanggalActionPerformed(evt);
-            }
-        });
+        try {
+            MaskFormatter dateMask = new MaskFormatter("####-##-##");
+            dateMask.setPlaceholderCharacter('_');
+            FormatTanggal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(dateMask));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        FormatTanggal.setToolTipText("Format: yyyy-MM-dd");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel9.setText("yyyy-mm-dd");
@@ -199,6 +204,17 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
         } catch (ParseException e) {
             tanggalValid = false;
         }
+
+        // Dapatkan nama pelapor berdasarkan NIK
+        String namaPelapor = "";
+        Warga warga = wargaDAO.getWargaByNik(this.nik);
+        if (warga != null) {
+            namaPelapor = warga.getNama_warga();
+        } else {
+            JOptionPane.showMessageDialog(this, "Data NIK pelapor tidak ditemukan!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // Validasi sederhana
         if (detailLaporan.trim().isEmpty() || tanggalStr.trim().isEmpty() || !tanggalValid) {
             JOptionPane.showMessageDialog(this,
@@ -207,9 +223,11 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
                                         JOptionPane.ERROR_MESSAGE);
             return; // Hentikan proses jika tidak valid
         }
+
         // Simpan ke database melalui controller
         boolean sukses = laporanController.submitLaporanBaru(
             nik,
+            namaPelapor,
             jenisLaporan,
             detailLaporan,
             tanggalStr,

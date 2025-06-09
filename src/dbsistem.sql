@@ -28,6 +28,7 @@ CREATE TABLE pegawai (
 CREATE TABLE laporan (
     id_laporan INT AUTO_INCREMENT PRIMARY KEY,
     nik_pelapor VARCHAR(16) NOT NULL,
+    nama_pelapor VARCHAR(100) NOT NULL,
     jenis_laporan VARCHAR(50) NOT NULL,
     detail_laporan TEXT NOT NULL,
     tanggal_kejadian DATE,

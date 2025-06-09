@@ -66,6 +66,8 @@ public class MenuPegawai extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnBack1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,22 +87,15 @@ public class MenuPegawai extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TabelLaporanDesa);
 
-        jLabel2.setText("Cari berdasarkan NIK");
+        jLabel2.setText("Cari Laporan");
 
-        txtCariLaporan.setToolTipText("Masukkan NIK warga pelapor untuk mencari laporannya");
-        
         btnCariLaporan.setText("OK");
-        btnCariLaporan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCariLaporanActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("Status Laporan");
 
         ComboStatusLaporan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        ComboStatusLaporan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Diproses", "Selesai", "Ditolak" }));
+        ComboStatusLaporan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Dikerjakan", "Selesai" }));
         ComboStatusLaporan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboStatusLaporanActionPerformed(evt);
@@ -118,6 +113,23 @@ public class MenuPegawai extends javax.swing.JFrame {
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(204, 0, 51));
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(0, 0, 0));
+        btnDelete.setText("DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnBack1.setText("BACK");
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
             }
         });
 
@@ -144,10 +156,15 @@ public class MenuPegawai extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(ComboStatusLaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(btnUpdate))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnBack1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
@@ -155,13 +172,13 @@ public class MenuPegawai extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCariLaporan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCariLaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -170,9 +187,13 @@ public class MenuPegawai extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnUpdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addGap(43, 43, 43)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBack1)))
                 .addGap(59, 59, 59))
         );
 
@@ -281,6 +302,33 @@ public class MenuPegawai extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int selectedRow = TabelLaporanDesa.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih laporan yang ingin dihapus terlebih dahulu!", "Tidak Ada Baris Dipilih", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int modelRow = TabelLaporanDesa.convertRowIndexToModel(selectedRow);
+        int idLaporan = Integer.parseInt(modelTabelLaporan.getValueAt(modelRow, 0).toString());
+        int confirm = JOptionPane.showConfirmDialog(this,
+            "Apakah Anda yakin ingin menghapus laporan ID " + idLaporan + "?",
+            "Konfirmasi Hapus Laporan",
+            JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            boolean sukses = laporanController.hapusLaporan(idLaporan, this);
+            if (sukses) {
+                loadDataLaporan(); // Refresh tabel setelah hapus
+            }
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        // TODO add your handling code here
+        LoginPegawai loginPegawaiForm = new LoginPegawai();
+        loginPegawaiForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBack1ActionPerformed
+
     private void inisialisasiTabelModel() {
         modelTabelLaporan = new DefaultTableModel(
             new Object[][] {},
@@ -362,7 +410,9 @@ public class MenuPegawai extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboStatusLaporan;
     private javax.swing.JTable TabelLaporanDesa;
+    private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnCariLaporan;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

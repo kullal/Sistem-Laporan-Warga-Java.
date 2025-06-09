@@ -29,9 +29,14 @@ public interface LaporanDAOInterface {
      */
     public boolean updateStatus(int idLaporan, String status_laporan, String nipPegawai);
     
+    /**
+     * Menghapus sebuah laporan dari database berdasarkan ID-nya.
+     * @param idLaporan ID Laporan yang akan dihapus.
+     */
+    public boolean delete(int idLaporan);
+    
     // Tambahkan method lain jika diperlukan di masa mendatang, contoh:
     // public Laporan getById(int idLaporan);
     // public List<Laporan> getByStatus(String status);
     // public List<Laporan> getByNikPelapor(String nik);
-    // public void delete(int idLaporan);
 } 

@@ -118,4 +118,26 @@ public class LaporanController {
             return false;
         }
     }
+
+    /**
+     * Menghapus laporan berdasarkan ID.
+     * @param idLaporan ID laporan yang akan dihapus.
+     * @param viewAsal Referensi ke view pemanggil untuk notifikasi.
+     * @return true jika berhasil, false jika gagal.
+     */
+    public boolean hapusLaporan(int idLaporan, MenuPegawai viewAsal) {
+        try {
+            boolean sukses = laporanDAO.delete(idLaporan);
+            if (sukses) {
+                JOptionPane.showMessageDialog(viewAsal, "Laporan berhasil dihapus!", "Hapus Laporan", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(viewAsal, "Gagal menghapus laporan!", "Hapus Laporan", JOptionPane.ERROR_MESSAGE);
+            }
+            return sukses;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(viewAsal, "Terjadi kesalahan saat menghapus laporan.", "Error Database", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error saat hapus laporan di controller: " + e.getMessage());
+            return false;
+        }
+    }
 } 

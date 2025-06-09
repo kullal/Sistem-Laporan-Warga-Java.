@@ -54,6 +54,7 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
         BtnSubmitLaporan = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTextDetail = new javax.swing.JTextArea();
+        btnBack1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,14 +77,13 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Tanggal");
 
-        try {
-            javax.swing.text.MaskFormatter dateMask = new javax.swing.text.MaskFormatter("####-##-##");
-            dateMask.setPlaceholderCharacter('_');
-            FormatTanggal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(dateMask));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        FormatTanggal.setToolTipText("Format: yyyy-MM-dd");
+        FormatTanggal.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL))));
+        FormatTanggal.setToolTipText("");
+        FormatTanggal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FormatTanggalActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel9.setText("yyyy-mm-dd");
@@ -99,6 +99,13 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
         JTextDetail.setColumns(20);
         JTextDetail.setRows(5);
         jScrollPane1.setViewportView(JTextDetail);
+
+        btnBack1.setText("BACK");
+        btnBack1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBack1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,6 +144,10 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
                             .addComponent(ComboJenisLaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(btnBack1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +174,9 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(89, 89, 89)
                 .addComponent(jLabel4)
-                .addGap(266, 266, 266))
+                .addGap(105, 105, 105)
+                .addComponent(btnBack1)
+                .addGap(134, 134, 134))
         );
 
         pack();
@@ -210,6 +223,13 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtnSubmitLaporanActionPerformed
 
+    private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
+        // TODO add your handling code here^
+        RegistrasiWarga registrasiWargaForm = new RegistrasiWarga();
+        registrasiWargaForm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBack1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,6 +270,7 @@ public class IsiLaporanWarga extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboJenisLaporan;
     private javax.swing.JFormattedTextField FormatTanggal;
     private javax.swing.JTextArea JTextDetail;
+    private javax.swing.JButton btnBack1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

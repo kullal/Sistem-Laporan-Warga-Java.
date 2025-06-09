@@ -104,4 +104,18 @@ public class LaporanDAO implements LaporanDAOInterface {
         }
         return false;
     }
+
+    @Override
+    public boolean delete(int idLaporan) {
+        String sql = "DELETE FROM laporan WHERE id_laporan = ?";
+        try (Connection conn = KoneksiDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, idLaporan);
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            System.err.println("Error saat menghapus laporan: " + e.getMessage());
+        }
+        return false;
+    }
 } 
